@@ -1,4 +1,4 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, api } from 'lwc';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import CATEGORY_FIELD from '@salesforce/schema/Question__c.Category__c';
 import QUESTION_OBJECT from '@salesforce/schema/Question__c';
@@ -9,7 +9,9 @@ export default class Tr_QuestionConfigurator extends LightningElement {
     categories = [];
     stages = [];
     error = undefined;
+    @api
     selectedCategories = [];
+    @api
     selectedStages = [];
 
     @wire(getObjectInfo, { objectApiName: QUESTION_OBJECT })
@@ -20,10 +22,8 @@ export default class Tr_QuestionConfigurator extends LightningElement {
         if(data) {
             this.error = undefined;
             this.categories = data.values.map( category => ({label: category.label, value: category.value, checked: false}));
-            console.log('categories', this.categories);
         } else if(error) {
             this.error = error;
-            console.log(this.error);
         }
     }
 
@@ -32,10 +32,8 @@ export default class Tr_QuestionConfigurator extends LightningElement {
         if(data) {
             this.error = undefined;
             this.stages = data.values.map( stage => ({label: stage.label, value: stage.value, checked: false}));
-            console.log('stages', this.stages);
         } else if(error) {
             this.error = error;
-            console.log(this.error);
         }
     }
 
@@ -47,7 +45,6 @@ export default class Tr_QuestionConfigurator extends LightningElement {
        } else {
             this.selectedCategories = this.selectedCategories.filter( category => category !== selectedCategory);
        }
-       console.log(this.selectedCategories);
     }
 
     handleStageChange(event) {
@@ -58,6 +55,5 @@ export default class Tr_QuestionConfigurator extends LightningElement {
        } else {
             this.selectedStages = this.selectedStages.filter( stage => stage !== selectedStage);
        }
-       console.log(this.selectedStages);
     }
 }
