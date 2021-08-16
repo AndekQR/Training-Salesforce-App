@@ -1,3 +1,32 @@
 <template>
-    questionConfigurator
+    <lightning-card title="Questions">
+        <div class="mainContainer">
+            <div class="slds-m-around_medium">
+                <h1 class="bold">Categories</h1>
+                <div class="slds-m-top_small slds-p-around_large checkboxList">
+                    <template for:each={categories} for:item="category">
+                        <lightning-input key={category.label} type="checkbox"
+                             data-id={category.value}
+                             label={category.label}
+                             onchange={handleCategoryChange}
+                             checked={category.checked}>
+                        </lightning-input>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-m-around_medium">
+                <h1 class="bold">Training Stage</h1>
+                <div class="slds-m-top_small slds-p-around_large checkboxList">
+                    <template for:each={stages} for:item="stage">
+                        <lightning-input key={stage.label} type="checkbox"
+                             data-id={stage.value}
+                             label={stage.label}
+                             onchange={handleStageChange}
+                             checked={stage.checked}>
+                        </lightning-input>
+                    </template>
+                </div>
+            </div>
+         </div>
+    </lightning-card>
 </template>
