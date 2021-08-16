@@ -1,10 +1,17 @@
 <template>
-    <div class="slds-grid slds-wrap slds-align_absolute-center">
-        <div class="slds-size_6-of-12 slds-large-size_5-of-12">
-            <c-tr-_-question-configurator></c-tr-_-question-configurator>
-        </div>
-        <div class="slds-size_6-of-12 slds-large-size_5-of-12">
-            <c-tr-_-participants-configurator></c-tr-_-participants-configurator>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-medium-size_10-of-12">
+            <div class="slds-grid slds-wrap slds-grid_align-center">
+                <div class="slds-p-around_xx-small slds-col slds-size_12-of-12 slds-medium-size_6-of-12">
+                    <c-tr-_-question-configurator></c-tr-_-question-configurator>
+                </div>
+                <div class="slds-p-around_xx-small slds-col slds-size_12-of-12 slds-medium-size_6-of-12">
+                    <c-tr-_-participants-configurator></c-tr-_-participants-configurator>
+                </div>
+                <div class="slds-p-around_xx-small slds-col slds-size_12-of-12">
+                    <button class="slds-button slds-button_brand beginButton" onclick={handleGameStart}>Begin</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
