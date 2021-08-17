@@ -15,6 +15,7 @@ export default class Tr_ParticipantsConfigurator extends LightningElement {
     error = undefined;
     isModalOpen = false;
     allParticipantsResult;
+
     @api
     get selectedRows() {
         let table = this.template.querySelector('lightning-datatable');

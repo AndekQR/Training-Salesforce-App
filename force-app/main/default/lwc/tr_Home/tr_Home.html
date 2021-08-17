@@ -9,8 +9,13 @@
                     <c-tr-_-participants-configurator></c-tr-_-participants-configurator>
                 </div>
                 <div class="slds-p-around_xx-small slds-col slds-size_12-of-12">
-                    <button class="slds-button slds-button_brand beginButton" onclick={handleGameStart}>Begin</button>
+                    <button class="slds-button slds-button_brand beginButton" onclick={handleGameStart}>{labels.begin}</button>
                 </div>
+                <template if:true={showGameScreen}>
+                    <div class="slds-p-around_xx-small slds-col slds-size_12-of-12">
+                        <c-tr-_-main-game-screen participants={participants}></c-tr-_-main-game-screen>
+                    </div>
+                </template>
             </div>
         </div>
     </div>

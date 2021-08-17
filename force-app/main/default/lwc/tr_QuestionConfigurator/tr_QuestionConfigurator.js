@@ -1,4 +1,4 @@
-import { LightningElement, wire, api } from 'lwc';
+import { LightningElement, wire, api, track } from 'lwc';
 import { getPicklistValues } from 'lightning/uiObjectInfoApi';
 import CATEGORY_FIELD from '@salesforce/schema/Question__c.Category__c';
 import QUESTION_OBJECT from '@salesforce/schema/Question__c';
@@ -9,10 +9,11 @@ export default class Tr_QuestionConfigurator extends LightningElement {
     categories = [];
     stages = [];
     error = undefined;
-    @api
-    selectedCategories = [];
-    @api
-    selectedStages = [];
+    isQuestionAmountGame = true;
+    @api isTimeGame = false;
+    @api gameDuration = 0;
+    @api selectedCategories = [];
+    @api selectedStages = [];
 
     @wire(getObjectInfo, { objectApiName: QUESTION_OBJECT })
     questionMetadata;
@@ -55,5 +56,21 @@ export default class Tr_QuestionConfigurator extends LightningElement {
        } else {
             this.selectedStages = this.selectedStages.filter( stage => stage !== selectedStage);
        }
+    }
+
+    handleGameSettingsChange(event) {
+       let setting = event.currentTarget.dataset.id;
+       let value = event.target.checked;
+       if (setting === 'TimeGame') {
+           this.isTimeGame = value;
+           this.isQuestionAmountGame = !value;
+       } else {
+           this.isTimeGame = !value;
+           this.isQuestionAmountGame = value;
+       }
+    }
+
+    handleValueChange(event) {
+        this.gameDuration = event.detail.value;
     }
 }

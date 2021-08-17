@@ -14,3 +14,17 @@
     font-size: 1.1rem;
     font-weight: bold;
 }
+
+.gameConfig {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.gameConfInput {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Categories</fullName>
+    <active>true</active>
+    <label>Categories</label>
+    <picklistValues>
+        <picklist>Category__c</picklist>
+        <values>
+            <fullName>Aura</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>LWC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Stage__c</picklist>
+        <values>
+            <fullName>First Application</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

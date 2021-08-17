@@ -15,6 +15,11 @@
                 <default>false</default>
                 <label>LWC</label>
             </value>
+            <value>
+                <fullName>Aura</fullName>
+                <default>false</default>
+                <label>Aura</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

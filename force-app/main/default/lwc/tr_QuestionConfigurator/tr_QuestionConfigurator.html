@@ -28,5 +28,32 @@
                 </div>
             </div>
          </div>
+         <div class="slds-m-around_medium">
+            <h1 class="bold">Game Settings</h1>
+            <div class="gameConfig">
+                    <lightning-input type="checkbox"
+                                     label="Time"
+                                     data-id="TimeGame"
+                                     onchange={handleGameSettingsChange}
+                                     checked={isTimeGame}>
+                    </lightning-input> 
+                    <lightning-input type="checkbox"
+                                     label="Questions"
+                                     data-id="QuestionGame"
+                                     onchange={handleGameSettingsChange}
+                                     checked={isQuestionAmountGame}>
+                    </lightning-input> 
+            </div>
+            <template if:true={isTimeGame}>
+               <div class="slds-m-around_medium">
+                    <lightning-input type="number" label="Enter time" onchange={handleValueChange}></lightning-input>
+               </div>
+            </template>
+             <template if:true={isQuestionAmountGame}>
+                <div class="slds-m-around_medium">
+                     <lightning-input type="number" label="Enter question amount" onchange={handleValueChange}></lightning-input>
+                </div>
+            </template>
+         </div>
     </lightning-card>
 </template>
