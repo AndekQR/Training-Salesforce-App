@@ -1,0 +1,67 @@
+<template>
+    <lightning-card title="Questions">
+        <div class="mainContainer">
+            <div class="slds-m-around_medium">
+                <h1 class="bold">Categories</h1>
+                <div class="slds-m-top_small slds-p-around_large checkboxList">
+                    <template for:each={categories} for:item="category">
+                        <lightning-input key={category.label} type="checkbox"
+                             data-id={category.value}
+                             label={category.label}
+                             onchange={handleCategoryChange}
+                             checked={category.checked}>
+                        </lightning-input>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-m-around_medium">
+                <h1 class="bold">Training Stage</h1>
+                <div class="slds-m-top_small slds-p-around_large checkboxList">
+                    <template for:each={stages} for:item="stage">
+                        <lightning-input key={stage.label} type="checkbox"
+                             data-id={stage.value}
+                             label={stage.label}
+                             onchange={handleStageChange}
+                             checked={stage.checked}>
+                        </lightning-input>
+                    </template>
+                </div>
+            </div>
+         </div>
+         <div class="slds-m-around_medium">
+            <h1 class="bold">Game Settings</h1>
+            <div class="gameConfig">
+                    <lightning-input type="checkbox"
+                                     label="Time"
+                                     data-id="TimeGame"
+                                     onchange={handleGameSettingsChange}
+                                     checked={isTimeGame}>
+                    </lightning-input> 
+                    <lightning-input type="checkbox"
+                                     label="Questions"
+                                     data-id="QuestionGame"
+                                     onchange={handleGameSettingsChange}
+                                     checked={isQuestionAmountGame}>
+                    </lightning-input> 
+            </div>
+            <template if:true={isTimeGame}>
+               <div class="slds-m-around_medium">
+                    <lightning-input type="number"
+                                     value={gameDuration}
+                                     label="Enter time"
+                                     onchange={handleValueChange}>
+                    </lightning-input>
+               </div>
+            </template>
+             <template if:true={isQuestionAmountGame}>
+                <div class="slds-m-around_medium">
+                     <lightning-input type="number"
+                                      value={gameDuration}
+                                      label="Enter question amount"
+                                      onchange={handleValueChange}>
+                     </lightning-input>
+                </div>
+            </template>
+         </div>
+    </lightning-card>
+</template>

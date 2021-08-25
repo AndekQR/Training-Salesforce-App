@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>all_answers</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>all answers</shortDescription>
+        <value>All Answers</value>
+    </labels>
+    <labels>
+        <fullName>bad_answers</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>bad answers</shortDescription>
+        <value>Bad Answers</value>
+    </labels>
+    <labels>
+        <fullName>begin</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>begin</shortDescription>
+        <value>Begin</value>
+    </labels>
+    <labels>
+        <fullName>cancel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>close</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>close</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>good_answers</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>good answers</shortDescription>
+        <value>Good Answers</value>
+    </labels>
+    <labels>
+        <fullName>new_participant</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>new participant</shortDescription>
+        <value>New Participant</value>
+    </labels>
+    <labels>
+        <fullName>number_of_participants_must_equals</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Number of participants must equals</shortDescription>
+        <value>Number of participants must equals {0}</value>
+    </labels>
+    <labels>
+        <fullName>participants</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>participants</shortDescription>
+        <value>Participants</value>
+    </labels>
+    <labels>
+        <fullName>pkt</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>pkt</shortDescription>
+        <value>pkt.</value>
+    </labels>
+    <labels>
+        <fullName>submit</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>submit</shortDescription>
+        <value>Submit</value>
+    </labels>
+</CustomLabels>

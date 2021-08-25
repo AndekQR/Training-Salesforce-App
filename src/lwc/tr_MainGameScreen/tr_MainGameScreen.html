@@ -1,0 +1,56 @@
+<template>
+    <div class="slds-grid slds-grid_align-center mainGameScreenContainer">
+        <div class="slds-col slds-size_6-of-12">
+            <div data-id="leftPanel" class="mainGameScreenContainer__left selected">
+                <div class="mainGameScreenContainer__left__details">
+                    <p><span class="subtitle name">{firstParticipant.name}</span></p>
+                    <p><span class="subtitle">{labels.good_answers}: </span>{firstParticipant.goodAnswers}</p>
+                    <p><span class="subtitle">{labels.bad_answers}: </span>{firstParticipant.badAnswers}</p>
+                    <p><span class="subtitle">{labels.all_answers}: </span>{firstParticipant.allAnswersNumber}</p>
+                </div>
+                <div class="mainGameScreenContainer__left__score">
+                    <span>{firstParticipant.goodAnswers} pkt.</span>
+                </div>
+                <div class="mainGameScreenContainer__left__numberGames">
+                    Game number {gameNumber.data}, between these participants!
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12">
+            <div data-id="rightPanel" class="mainGameScreenContainer__right">
+                <div class="mainGameScreenContainer__right__details">
+                    <p><span class="subtitle name">{secondParticipant.name}</span></p>
+                    <p><span class="subtitle">{labels.good_answers}: </span>{secondParticipant.goodAnswers}</p>
+                    <p><span class="subtitle">{labels.bad_answers}: </span>{secondParticipant.badAnswers}</p>
+                    <p><span class="subtitle">{labels.all_answers}: </span>{secondParticipant.allAnswersNumber}</p>
+
+                </div>
+                <div class="mainGameScreenContainer__right__score">
+                    <span>{secondParticipant.goodAnswers} {labels.pkt}</span>
+                </div>
+                <div class="mainGameScreenContainer__right__control">
+                    <div class="mainGameScreenContainer__right__control__duration">
+                        <template if:true={showingTime}>
+                            <c-tr-_-stop-watch ontimefinish={handleFinish} minutes={duration}></c-tr-_-stop-watch>
+                        </template>
+                        <template if:false={showingTime}>
+                            {duration} questions left
+                        </template>
+                    </div>
+                    <lightning-button label="Finish" onclick={handleFinish} variant="brand"></lightning-button>
+                </div>
+            </div>
+        </div>
+        <div class="mainGameScreenContainer__card">
+            <c-tr-_-question-card
+                    categories={questionConfig.categories}
+                    stages={questionConfig.stages}
+                    ongoodanswer={handleGoodAnswer}
+                    onbadanswer={handleBadAnswer}>
+            </c-tr-_-question-card>
+        </div>
+        <template if:true={loading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+    </div>
+</template>

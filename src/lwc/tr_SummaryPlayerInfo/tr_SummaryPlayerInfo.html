@@ -1,0 +1,26 @@
+<template>
+    <div class="player-info-container">
+      <p>Player: <span>{player.name}</span></p>
+      <p>Good answers: <span>{player.goodAnswers}</span></p>
+      <p>Bad answers: <span>{player.badAnswers}</span></p>
+
+      <div class="slds-m-top_medium">
+         <h1 class="bold">Questions</h1>
+         <div class="question-container">
+             <template for:each={player.answeredQuestions} for:item="question">
+                 <div class="slds-m-top_small" key={question.id}>
+                     {question.question}
+                     <template if:true={question.correct}>
+                          <lightning-icon class="slds-m-left_small" icon-name="utility:check" variant="success" size="x-small">
+                          </lightning-icon>
+                     </template>
+                     <template if:false={question.correct}>
+                          <lightning-icon class="slds-m-left_small" icon-name="utility:close" variant="warning" size="x-small">
+                          </lightning-icon>
+                     </template>
+                    </div>
+             </template>
+         </div>
+      </div>
+    </div>
+</template>

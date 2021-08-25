@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title={labels.participants}>
+        <lightning-button label="New" slot="actions" onclick={onNewParticipant}></lightning-button>
+        <div>
+            <lightning-datatable
+                max-row-selection="2"
+                key-field="id"
+                data={participants}
+                class="slds-table_header-fixed_container slds-scrollable_x slds-border_top"
+                columns={columns}>
+            </lightning-datatable>
+        </div>
+    </lightning-card>
+    <template if:true={isModalOpen}>
+        <c-tr-_-new-participant onsuccess={onCreateParticipant} onclose={closeModal}></c-tr-_-new-participant>
+    </template>
+</template>

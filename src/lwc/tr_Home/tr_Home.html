@@ -1,0 +1,46 @@
+<template>
+    <div class="slds-grid slds-grid_align-center">
+        <div class="slds-medium-size_10-of-12">
+            <div class="slds-grid slds-wrap slds-grid_align-center slds-card">
+                <template if:true={showConfScreen}>
+                    <div class="slds-p-around_xx-small slds-col slds-size_12-of-12 slds-medium-size_6-of-12">
+                        <c-tr-_-question-configurator></c-tr-_-question-configurator>
+                    </div>
+                    <div class="slds-p-around_xx-small slds-col slds-size_12-of-12 slds-medium-size_6-of-12">
+                        <c-tr-_-participants-configurator></c-tr-_-participants-configurator>
+                    </div>
+                    <div class="slds-p-around_xx-small slds-col slds-size_12-of-12">
+                        <button class="slds-button slds-button_brand beginButton" onclick={handleGameStart}>
+                            {labels.begin}
+                        </button>
+                    </div>
+                </template>
+                <template if:true={showMainScreen}>
+                    <div class="slds-p-around_xx-small slds-col slds-size_12-of-12">
+                        <c-tr-_-main-game-screen participants={participants} question-config={questionConfiguration}
+                                                 onfinish={handleFinish}>
+
+                        </c-tr-_-main-game-screen>
+                    </div>
+                </template>
+                <template if:true={showOnePlayerScreen}>
+                    <div class="slds-p-around_xx-small slds-col slds-size_12-of-12">
+                        <c-tr-_-one-player-main-screen participants={participants}
+                                                       question-config={questionConfiguration}
+                                                       onfinishone={handleFinishOne}>
+
+                        </c-tr-_-one-player-main-screen>
+                    </div>
+                </template>
+                <template if:true={showSummary}>
+                    <div class="slds-p-around_xx-small slds-col slds-size_12-of-12">
+                        <c-tr-_-end-game-result details={summaryDetails}
+                                                onbacktomenu={handleBack}>
+
+                        </c-tr-_-end-game-result>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</template>

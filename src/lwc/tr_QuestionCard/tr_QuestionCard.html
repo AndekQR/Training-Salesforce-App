@@ -1,0 +1,27 @@
+<template>
+    <div class="questionCardContainer">
+        <div class="flip-card slds-m-bottom_medium" data-id="flipCard" onclick={flip}>
+           <div class="questionCardContainer__card flip-card-inner">
+                   <div class="flip-card-front">
+                       <div class="questionCardContainer__category">
+                           <span>Kategoria: {question.category} | Etap: {question.stage}</span>
+                       </div>
+                       <div class="questionCardContainer__question">
+                           {question.question}
+                       </div>
+                   </div>
+                   <div class="flip-card-back">
+                       {question.answer}
+                   </div>
+           </div>
+        </div>
+        <div class="questionCardContainer__controls">
+            <div class="questionCardContainer__controls__good" onclick={goodAnswer}>
+                GOOD
+            </div>
+            <div class="questionCardContainer__controls__bad" onclick={badAnswer}>
+                BAD
+            </div>
+        </div>
+    </div>
+</template>

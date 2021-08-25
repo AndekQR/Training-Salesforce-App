@@ -1,0 +1,30 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.checkboxList {
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.bold {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.gameConfig {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.gameConfInput {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+}

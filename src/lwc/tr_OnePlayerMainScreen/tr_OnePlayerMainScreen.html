@@ -1,0 +1,40 @@
+<template>
+    <div class="slds-grid slds-grid_align-center mainGameScreenContainer">
+        <div class="slds-col slds-size_4-of-12">
+            <div data-id="leftPanel" class="mainGameScreenContainer__left">
+                <div class="mainGameScreenContainer__left__details">
+                    <p><span class="subtitle name">{participant.name}</span></p>
+                    <p><span class="subtitle">{labels.good_answers}: </span>{participant.goodAnswers}</p>
+                    <p><span class="subtitle">{labels.bad_answers}: </span>{participant.badAnswers}</p>
+                    <p><span class="subtitle">{labels.all_answers}: </span>{participant.allAnswersNumber}</p>
+                </div>
+                <div class="mainGameScreenContainer__left__score">
+                    <span>{participant.goodAnswers} pkt.</span>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-size_8-of-12">
+            <div data-id="rightPanel" class="mainGameScreenContainer__right">
+                <div class="mainGameScreenContainer__card">
+                    <c-tr-_-question-card categories={questionConfig.categories} stages={questionConfig.stages}
+                                          ongoodanswer={handleGoodAnswer} onbadanswer={handleBadAnswer}>
+                    </c-tr-_-question-card>
+                </div>
+                <div class="mainGameScreenContainer__right__control__duration">
+                    <template if:true={showingTime}>
+                        <c-tr-_-stop-watch ontimefinish={handleFinishOne} minutes={duration}></c-tr-_-stop-watch>
+                    </template>
+                    <template if:false={showingTime}>
+                        {duration} Questions Left
+                    </template>
+                    <div class="mainGameScreenContainer__right__control__duration__button">
+                        <lightning-button label="Finish" onclick={handleFinishOne} variant="brand"></lightning-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <template if:true={loading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+    </div>
+</template>

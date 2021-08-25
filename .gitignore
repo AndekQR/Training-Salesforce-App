@@ -1,0 +1,22 @@
+*.log
+-local-*
+.DS_Store
+dist/*.js
+types/
+node_modules/
+coverage/
+.idea/
+.project/
+
+lib/
+packages/**/dist/
+benchmarking/dist/
+__benchmarks_results__/
+packages/integration-tests/public/
+packages/integration-tests/errorShots/
+packages/integration-tests/results/
+packages/integration-tests/.env
+
+# custom node_modules for testing
+!packages/@lwc/module-resolver/src/__tests__/**/node_modules/
+!packages/@lwc/rollup-plugin/src/__tests__/**/node_modules/

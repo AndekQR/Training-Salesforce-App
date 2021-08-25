@@ -1,0 +1,21 @@
+.player-info-container {
+    width: 100%;
+}
+
+.questions-container {
+    max-height: 400px;
+    overflow-y: scroll;
+    font-size: 0.9rem;
+}
+
+.player-info-container > p {
+    font-weight: bold;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+p > span {
+    font-weight: normal;
+}
