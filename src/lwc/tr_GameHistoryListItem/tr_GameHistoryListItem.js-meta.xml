@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
-    <description>tr_GameService</description>
+    <description>Tr Game History List Item</description>
     <isExposed>false</isExposed>
-    <masterLabel>tr_GameService</masterLabel>
+    <masterLabel>Tr Game History List Item</masterLabel>
 </LightningComponentBundle>

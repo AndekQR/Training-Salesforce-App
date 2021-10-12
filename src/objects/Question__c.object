@@ -187,6 +187,46 @@
                     <default>false</default>
                     <label>Limits</label>
                 </value>
+                <value>
+                    <fullName>Apex</fullName>
+                    <default>false</default>
+                    <label>Apex</label>
+                </value>
+                <value>
+                    <fullName>Security</fullName>
+                    <default>false</default>
+                    <label>Security</label>
+                </value>
+                <value>
+                    <fullName>MC Scripts</fullName>
+                    <default>false</default>
+                    <label>MC Scripts</label>
+                </value>
+                <value>
+                    <fullName>MC APIs</fullName>
+                    <default>false</default>
+                    <label>MC APIs</label>
+                </value>
+                <value>
+                    <fullName>MC Data Management</fullName>
+                    <default>false</default>
+                    <label>MC Data Management</label>
+                </value>
+                <value>
+                    <fullName>MC Admin</fullName>
+                    <default>false</default>
+                    <label>MC Admin</label>
+                </value>
+                <value>
+                    <fullName>MC Marketing</fullName>
+                    <default>false</default>
+                    <label>MC Marketing</label>
+                </value>
+                <value>
+                    <fullName>Interview</fullName>
+                    <default>false</default>
+                    <label>Interview</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -202,7 +242,7 @@
         <fullName>Stage__c</fullName>
         <externalId>false</externalId>
         <label>Stage</label>
-        <required>true</required>
+        <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -224,6 +264,16 @@
                     <default>false</default>
                     <label>Second Application</label>
                 </value>
+                <value>
+                    <fullName>MC Specialist</fullName>
+                    <default>false</default>
+                    <label>MC Specialist</label>
+                </value>
+                <value>
+                    <fullName>MC Consultant</fullName>
+                    <default>false</default>
+                    <label>MC Consultant</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -234,6 +284,7 @@
         <columns>Answer__c</columns>
         <columns>Category__c</columns>
         <columns>Stage__c</columns>
+        <columns>CREATEDBY_USER</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -249,6 +300,10 @@
         <picklistValues>
             <picklist>Category__c</picklist>
             <values>
+                <fullName>Apex</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Aura</fullName>
                 <default>false</default>
             </values>
@@ -257,7 +312,35 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Interview</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Limits</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MC APIs</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MC Admin</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MC Data Management</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MC Marketing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MC Scripts</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Security</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -265,6 +348,14 @@
             <picklist>Stage__c</picklist>
             <values>
                 <fullName>First Application</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MC Consultant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MC Specialist</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -287,6 +378,6 @@
         <searchResultsAdditionalFields>Category__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Stage__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>Private</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

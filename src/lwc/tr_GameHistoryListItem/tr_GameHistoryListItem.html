@@ -1,0 +1,25 @@
+<template>
+    <div class={itemContainerClasses} onclick={handleItemClick}>
+        <div if:true={gameServiceInstance.isTwoPlayerGame} class="itemContainer__firstIcon">
+            <lightning-icon icon-name={gameServiceInstance.firstUserIcon}></lightning-icon>
+        </div>
+        <div class="itemContainer__info">
+            <div class="itemContainer__info__names">
+                <span>{gameServiceInstance.firstParticipant.name}</span>
+                <template if:true={gameServiceInstance.isTwoPlayerGame}>
+                    <span> vs {gameServiceInstance.secondParticipant.name}</span>
+                </template>
+            </div>
+            <div class="itemContainer__info__date">
+                <lightning-formatted-date-time
+                        value={gameRecord.createdTime} year="numeric" month="long" day="numeric"
+                        hour="2-digit"
+                        minute="2-digit" time-zone="Europe/Berlin">
+                </lightning-formatted-date-time>
+            </div>
+        </div>
+        <div if:true={gameServiceInstance.isTwoPlayerGame} class="itemContainer__secondIcon">
+            <lightning-icon icon-name={gameServiceInstance.secondUserIcon}></lightning-icon>
+        </div>
+    </div>
+</template>

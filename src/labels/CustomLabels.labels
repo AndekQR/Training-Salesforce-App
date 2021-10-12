@@ -36,6 +36,13 @@
         <value>Close</value>
     </labels>
     <labels>
+        <fullName>game_duration_greater_than</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>game duration greater than</shortDescription>
+        <value>Game duration must be greater than 0</value>
+    </labels>
+    <labels>
         <fullName>good_answers</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -57,6 +64,13 @@
         <value>Number of participants must equals {0}</value>
     </labels>
     <labels>
+        <fullName>number_participants</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>number participants</shortDescription>
+        <value>Number of participants must equals 1 or 2</value>
+    </labels>
+    <labels>
         <fullName>participants</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -69,6 +83,20 @@
         <protected>true</protected>
         <shortDescription>pkt</shortDescription>
         <value>pkt.</value>
+    </labels>
+    <labels>
+        <fullName>select_one_category</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>select one category</shortDescription>
+        <value>Select at least one category</value>
+    </labels>
+    <labels>
+        <fullName>select_one_training_stage</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>select one training stage</shortDescription>
+        <value>Select at least one training stage</value>
     </labels>
     <labels>
         <fullName>submit</fullName>

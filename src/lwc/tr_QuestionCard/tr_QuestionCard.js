@@ -14,6 +14,7 @@ export default class Tr_QuestionCard extends LightningElement {
     categories;
     @api
     stages;
+    questions = [];
 
     goodAnswer() {
         if (this.isFlipped) {
@@ -32,19 +33,23 @@ export default class Tr_QuestionCard extends LightningElement {
     }
 
     getNextQuestion() {
-        setTimeout(() => {
-            this.getQuestions();
-        }, 100)
+        this.question = this.questions.pop();
     }
 
     getQuestions() {
         if (this.categories && this.stages) {
             getQuestion({categories: Array.from(this.categories), stages: Array.from(this.stages)})
                 .then(result => {
-                    this.question = result;
+                    this.questions = result;
+                    this.shuffleQuestions();
+                    this.getNextQuestion();
                 })
                 .catch(error => console.log(error));
         }
+    }
+
+    shuffleQuestions() {
+        this.questions = this.questions.sort((a, b) => 0.5 - Math.random());
     }
 
     flip() {

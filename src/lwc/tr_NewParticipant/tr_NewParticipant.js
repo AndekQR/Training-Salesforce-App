@@ -5,6 +5,8 @@ import submit from '@salesforce/label/c.submit'
 import close from '@salesforce/label/c.close'
 import new_participant from '@salesforce/label/c.new_participant'
 
+const PARENT_ACCOUNT_ID = '0010900000hNmveAAC'; //TODO: możnaby coś z tym zrobić :)
+
 export default class Tr_NewParticipant extends LightningElement {
 
     labels = {cancel, submit, close, new_participant}
@@ -33,5 +35,12 @@ export default class Tr_NewParticipant extends LightningElement {
                 field.reset();
             });
         }
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        const fields = event.detail.fields;
+        fields.AccountId = PARENT_ACCOUNT_ID;
+        this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
 }

@@ -25,8 +25,6 @@ export default class Tr_StopWatch extends LightningElement {
                 this.dispatchEvent(new CustomEvent('timefinish'));
                 this.totalMilliseconds = 0;
             }
-
-            console.log('timer');
             this.timeValue = new Date(this.totalMilliseconds).toISOString().substr(11, 8);
             this.totalMilliseconds -= 1000;
         }, 1000);

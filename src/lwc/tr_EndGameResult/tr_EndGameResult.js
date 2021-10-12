@@ -12,7 +12,7 @@ export default class Tr_EndGameResult extends LightningElement {
     gameId = ''
     answeredQuestions = [];
 
-    connectedCallback() {
+    async connectedCallback() {
         let details = JSON.parse(JSON.stringify(this.details));
         if (details.playerOne) {
             this.playerOne = details.playerOne;
@@ -21,14 +21,14 @@ export default class Tr_EndGameResult extends LightningElement {
             this.playerTwo = details.playerTwo;
         }
         this.gameId = details.gameId;
-        this.getAnswered(this.playerOne);
+        await this.getAnswered(this.playerOne);
         if (this.playerTwo) {
             this.getAnswered(this.playerTwo);
         }
     }
 
     getAnswered(player) {
-        getAnsweredQuestions({gameId: this.gameId, participantId: player.id})
+        return getAnsweredQuestions({gameId: this.gameId, participantId: player.id})
             .then(result => {
                 player.answeredQuestions = result
             })

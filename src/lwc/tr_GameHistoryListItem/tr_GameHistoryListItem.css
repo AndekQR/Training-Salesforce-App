@@ -1,0 +1,37 @@
+.itemContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #e3e3e3;
+}
+
+.itemContainer:hover {
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+
+.itemContainer__firstIcon {
+
+}
+
+.itemContainer__info {
+    text-align: center;
+    width: 100%;
+}
+
+.itemContainer__info__names {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.itemContainer__secondIcon {
+
+}
+
+.selected {
+    background-color: #a0a0a0;
+}

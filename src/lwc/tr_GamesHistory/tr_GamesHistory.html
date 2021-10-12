@@ -1,0 +1,69 @@
+<template>
+    <div class="gameHistoryContainer slds-grid slds-grid_align-center">
+        <div class="slds-col slds-size_10-of-12 slds-grid slds-gutters_xx-small">
+            <div class="gameHistoryContainer__inner slds-grid slds-grid_align-center">
+                <div class="slds-col slds-size_4-of-12">
+                    <div class="gameHistoryContainer__inner__list">
+                        <div class="gameHistoryContainer__inner__list__search">
+                            <lightning-input
+                                    variant="label-hidden"
+                                    class="gameHistoryContainer__inner__list__search__input"
+                                    placeholder={labels.search}
+                                    onchange={onSearchQueryChange}>
+                            </lightning-input>
+                        </div>
+                        <template if:true={paginationResponse}>
+                            <template for:each={paginationResponse.data} for:item="record">
+                                <c-tr_-game-history-list-item key={record.id}
+                                                              onclickitem={handleClick}
+                                                              selected-record-id={selectedGameId}
+                                                              game-record={record}>
+                                </c-tr_-game-history-list-item>
+                            </template>
+                        </template>
+                        <div class="gameHistoryContainer__inner__list__controls">
+                            <div class="gameHistoryContainer__inner__list__controls__buttons">
+                                <button disabled={isDisabledFirst} class="slds-button slds-button_brand"
+                                        onclick={handleFirst}>
+                                    {labels.first}
+                                </button>
+                                <button disabled={isDisabledFirst} class="slds-button slds-button_brand"
+                                        onclick={handlePrevious}>
+                                    {labels.previous}
+                                </button>
+                                <button disabled={isDisabledLast} class="slds-button slds-button_brand"
+                                        onclick={handleNext}>
+                                    {labels.next}
+                                </button>
+                                <button disabled={isDisabledLast} class="slds-button slds-button_brand"
+                                        onclick={handleLast}>
+                                    {labels.last}
+                                </button>
+                            </div>
+                            <div class="gameHistoryContainer__inner__list__controls__pageSizeSelect">
+                                <div class="gameHistoryContainer__inner__list__controls__pageSizeSelect__number">
+                                    Page
+                                    {paginationParams.pageNumber}
+                                    Of
+                                    {lastPageNumber}
+                                </div>
+                                <lightning-combobox
+                                        placeholder={labels.select_page_size}
+                                        value={paginationParams.pageSize}
+                                        options={pageSizeOptions}
+                                        class="gameHistoryContainer__inner__list__controls__pageSizeSelect__combobox"
+                                        onchange={handlePageSizeChange}>
+                                </lightning-combobox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_8-of-12">
+                    <div class="gameHistoryContainer__inner__details">
+                        <c-ta_-game-history-detail game-record={selectedGame}></c-ta_-game-history-detail>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

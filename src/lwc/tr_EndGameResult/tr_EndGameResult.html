@@ -5,7 +5,9 @@
           <h1 class="summary">Summary</h1>
           <div class="slds-grid slds-wrap slds-grid_align-center slds-m-around_medium">
               <div class="player-info-container">
-                <c-tr-_-summary-player-info player={playerOne}></c-tr-_-summary-player-info>
+                <template if:true={playerOne}>
+                  <c-tr-_-summary-player-info player={playerOne}></c-tr-_-summary-player-info>
+                </template>
               </div>
               <div class="player-info-container">
                 <template if:true={playerTwo}>

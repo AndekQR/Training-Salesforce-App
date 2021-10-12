@@ -1,0 +1,80 @@
+.detailContainer {
+    padding: 5px;
+}
+
+.detailContainer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.detailContainer__header__title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.detailContainer__header__details {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.detailContainer__body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+}
+
+.detailContainer__body__inner {
+    background-color: white;
+    margin-top: 5px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.detailContainer__body__header {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 5px;
+    gap: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.detailContainer__body__first__questions {
+    overflow-wrap: break-word;
+}
+
+
+.detailContainer__body__second {
+
+}
+
+.subtitle {
+    font-weight: 600;
+}
+
+.detailContainer__body__stats {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.noSelectedGameContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: white;
+    border-radius: 5px;
+}

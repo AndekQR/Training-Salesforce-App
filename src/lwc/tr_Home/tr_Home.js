@@ -47,7 +47,7 @@ export default class Tr_Home extends LightningElement {
         }
         return {
             categories: questionComponent.selectedCategories,
-            stages: questionComponent.selectedStages,
+            stages: questionComponent.selectedStages || [],
             gameType: questionComponent.isTimeGame ? 'Time' : 'Questions',
             gameDuration: questionComponent.gameDuration
         };
@@ -77,10 +77,7 @@ export default class Tr_Home extends LightningElement {
     }
 
     configErrors() {
-        if (this.questionConfiguration.stages.length === 0) {
-            this.showError(this.labels.select_one_training_stage);
-            return true;
-        } else if (this.questionConfiguration.categories.length === 0) {
+        if (this.questionConfiguration.categories.length === 0) {
             this.showError(this.labels.select_one_category);
             return true;
         } else if (this.questionConfiguration.gameDuration === 0) {

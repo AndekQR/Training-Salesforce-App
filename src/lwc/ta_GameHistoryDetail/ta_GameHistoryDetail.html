@@ -1,0 +1,56 @@
+<template>
+    <div if:true={gameRecord} class="detailContainer">
+        <div class="detailContainer__header">
+            <div class="detailContainer__header__title">
+                <span>{gameServiceInstance.firstParticipant.name}</span>
+                <template if:true={gameServiceInstance.isTwoPlayerGame}>
+                    <span> vs {gameServiceInstance.secondParticipant.name}</span>
+                </template>
+            </div>
+            <div class="detailContainer__header__details">
+                <span><span class="subtitle">Duration: </span>{gameDuration}</span>
+                <span><span class="subtitle">Number Of Players: </span>{numberOfPlayers}</span>
+                <span><span class="subtitle">Number Of Answered Questions: </span> {numberOfQuestions}</span>
+            </div>
+        </div>
+        <div class="detailContainer__body slds-grid">
+            <div class={sizeStyles}>
+                <div class="detailContainer__body__inner">
+                    <div class="detailContainer__body__header">
+                        <lightning-icon icon-name={gameServiceInstance.firstUserIcon}></lightning-icon>
+                        <span>{gameServiceInstance.firstParticipant.name}</span>
+                    </div>
+                    <div class="detailContainer__body__first__questions">
+                        <template for:each={gameServiceInstance.firstParticipantQuestions} for:item="record">
+                            <c-tr_-question-item key={record.id} question={record}></c-tr_-question-item>
+                        </template>
+                    </div>
+                    <div class="detailContainer__body__stats">
+                        <span class="subtitle">Good Answers: <span>{firstParticipantQuestionStatistic.good}</span></span>
+                        <span class="subtitle">Bad Answers: <span>{firstParticipantQuestionStatistic.bad}</span></span>
+                    </div>
+                </div>
+            </div>
+            <div if:true={gameServiceInstance.isTwoPlayerGame} class="slds-col slds-size_6-of-12">
+                <div  class="detailContainer__body__inner">
+                    <div class="detailContainer__body__header">
+                        <lightning-icon icon-name={gameServiceInstance.secondUserIcon}></lightning-icon>
+                        <span>{gameServiceInstance.secondParticipant.name}</span>
+                    </div>
+                    <div class="detailContainer__body__first__questions">
+                        <template for:each={gameServiceInstance.secondParticipantQuestions} for:item="record">
+                            <c-tr_-question-item key={record.id} question={record}></c-tr_-question-item>
+                        </template>
+                    </div>
+                    <div class="detailContainer__body__stats">
+                        <span class="subtitle">Good Answers: <span>{secondParticipantQuestionStatistic.good}</span></span>
+                        <span class="subtitle">Bad Answers: <span>{secondParticipantQuestionStatistic.bad}</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div if:false={gameRecord} class="noSelectedGameContainer">
+        Select Game For Details!
+    </div>
+</template>

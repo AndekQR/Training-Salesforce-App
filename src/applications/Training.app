@@ -11,6 +11,7 @@
     <label>Training</label>
     <navType>Standard</navType>
     <tabs>Training_App</tabs>
+    <tabs>Game_History</tabs>
     <tabs>Question__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Training_UtilityBar</utilityBar>

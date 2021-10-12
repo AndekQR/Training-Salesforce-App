@@ -1,0 +1,21 @@
+<template>
+    <div key={question.id} class="questionItemContainer">
+        <div class="questionItemContainer__header">
+            <span><span class="subtitle">Category: </span>{question.category}</span>
+            <span><span class="subtitle">Stage: </span>{question.stage}</span>
+        </div>
+        <div class="questionItemContainer__body">
+            <div class="questionItemContainer__body__icon">
+                <template if:true={question.isAnswerCorrect}>
+                    <lightning-icon icon-name={answerCorrectIcon}></lightning-icon>
+                </template>
+                <template if:false={question.isAnswerCorrect}>
+                    <lightning-icon icon-name={answerIncorrectIcon}></lightning-icon>
+                </template>
+            </div>
+            <div class="questionItemContainer__body__text">
+                <span>{question.question}</span>
+            </div>
+        </div>
+    </div>
+</template>
