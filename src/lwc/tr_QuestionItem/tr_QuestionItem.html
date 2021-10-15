@@ -2,7 +2,7 @@
     <div key={question.id} class="questionItemContainer">
         <div class="questionItemContainer__header">
             <span><span class="subtitle">Category: </span>{question.category}</span>
-            <span><span class="subtitle">Stage: </span>{question.stage}</span>
+            <span if:true={question.stage}><span class="subtitle">Stage: </span>{question.stage}</span>
         </div>
         <div class="questionItemContainer__body">
             <div class="questionItemContainer__body__icon">

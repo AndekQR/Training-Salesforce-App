@@ -99,8 +99,9 @@ public with sharing class TR_GameService {
         return TR_Game.mapToTrGames(archivedGames);
     }
 
-    @AuraEnabled(Cacheable = true)
+    @AuraEnabled
     public static TR_PaginationResponse getArchivedGames(TR_PaginationRequest paginationRequest) {
+        removeBadGameRecords();
         List<TR_Game> trGames = new List<TR_Game>();
         if (String.isNotBlank(paginationRequest.searchQuery)) {
             Set<Id> ids = getGamesByParticipantName(paginationRequest.searchQuery);
@@ -120,6 +121,16 @@ public with sharing class TR_GameService {
                     trGames
             );
         }
+    }
 
+    private static void removeBadGameRecords() {
+        List<Game__c> games = [SELECT Id, (SELECT Id FROM AnsweredQuestions__r) FROM Game__c];
+        List<Game__c> gamesToDelete = new List<Game__c>();
+        for (Game__c game : games) {
+            if(game.AnsweredQuestions__r.size() == 0) {
+                gamesToDelete.add(game);
+            }
+        }
+        delete gamesToDelete;
     }
 }

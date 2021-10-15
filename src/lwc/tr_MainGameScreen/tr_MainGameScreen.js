@@ -74,6 +74,7 @@ export default class Tr_MainGameScreen extends LightningElement {
 
     disconnectedCallback() {
         this.terminateStopWatch();
+        callFinishGame(this.game.id);
     }
 
     terminateStopWatch() {

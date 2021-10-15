@@ -1,14 +1,13 @@
 import {LightningElement, api} from 'lwc';
+import {ShowToastEvent} from 'lightning/platformShowToastEvent';
 import getQuestion from '@salesforce/apex/TR_QuestionService.getQuestion'
+
+const questionDegrees = 360;
+const answerDegrees = 180;
 
 export default class Tr_QuestionCard extends LightningElement {
 
-    isFlipped = false;
-
-    connectedCallback() {
-        this.getQuestions();
-    }
-
+    isCardShowingQuestion = true;
     question = {id: '', question: '', answer: '', category: ''};
     @api
     categories;
@@ -16,24 +15,28 @@ export default class Tr_QuestionCard extends LightningElement {
     stages;
     questions = [];
 
-    goodAnswer() {
-        if (this.isFlipped) {
-            this.flip();
-        }
-        this.dispatchEvent(new CustomEvent('goodanswer', {detail: this.question.id}));
-        this.getNextQuestion();
+    connectedCallback() {
+        this.getQuestions();
     }
 
-    badAnswer() {
-        if (this.isFlipped) {
-            this.flip();
-        }
+    goodAnswer(event) {
+        this.handleFlip(questionDegrees);
+        this.dispatchEvent(new CustomEvent('goodanswer', {detail: this.question.id}));
+        this.getNextQuestion();
+        event.stopPropagation();
+    }
+
+    badAnswer(event) {
+        this.handleFlip(questionDegrees);
         this.dispatchEvent(new CustomEvent('badanswer', {detail: this.question.id}));
         this.getNextQuestion();
+        event.stopPropagation();
     }
 
     getNextQuestion() {
-        this.question = this.questions.pop();
+        setTimeout(() => {
+            this.question = this.questions.pop();
+        }, 600);
     }
 
     getQuestions() {
@@ -41,45 +44,45 @@ export default class Tr_QuestionCard extends LightningElement {
             getQuestion({categories: Array.from(this.categories), stages: Array.from(this.stages)})
                 .then(result => {
                     this.questions = result;
-                    this.shuffleQuestions();
-                    this.getNextQuestion();
+                    if (this.questions && this.questions.length > 0) {
+                        this.shuffleQuestions();
+                        this.getNextQuestion();
+                    } else {
+                        const toastEvent = new ShowToastEvent({
+                            title: 'No Questions From Combination Of Chosen Categories And Stages',
+                            variant: 'error'
+                        });
+                        this.dispatchEvent(toastEvent);
+                    }
                 })
                 .catch(error => console.log(error));
         }
     }
 
     shuffleQuestions() {
-        this.questions = this.questions.sort((a, b) => 0.5 - Math.random());
+        this.questions = this.questions.sort(() => 0.5 - Math.random());
     }
 
     flip() {
-        if (this.isFlipped) {
-            this.handleFlipBack();
+        if (this.isCardShowingQuestion) {
+            this.handleFlip(answerDegrees);
         } else {
-            this.handleFlip();
-        }
-        this.isFlipped = !this.isFlipped;
-    }
-
-    handleFlip() {
-        let divblock = this.template.querySelector('[data-id="flipCard"]');
-        if (divblock) {
-            const style = document.createElement('style');
-            style.innerText = `
-              .flip-card-inner {
-                transform: rotateY(180deg);
-              }`;
-            this.template.querySelector('[data-id="flipCard"]').appendChild(style);
+            this.handleFlip(questionDegrees);
         }
     }
 
-    handleFlipBack() {
-        let divblock = this.template.querySelector('[data-id="flipCard"]');
-        if (divblock) {
+    handleFlip(degrees) {
+        if (this.isCardShowingQuestion && (degrees === questionDegrees)) {
+            return;
+        }
+        this.isCardShowingQuestion = (degrees === questionDegrees);
+        let cardContainer = this.template.querySelector('[data-id="flipCard"]');
+        if (cardContainer) {
             const style = document.createElement('style');
             style.innerText = `
               .flip-card-inner {
-                transform: rotateY(360deg);
+                transform: rotateY(${degrees}deg);
+                transition: transform 0.6s;
               }`;
             this.template.querySelector('[data-id="flipCard"]').appendChild(style);
         }

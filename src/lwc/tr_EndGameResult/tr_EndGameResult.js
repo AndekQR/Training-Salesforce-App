@@ -30,7 +30,12 @@ export default class Tr_EndGameResult extends LightningElement {
     getAnswered(player) {
         return getAnsweredQuestions({gameId: this.gameId, participantId: player.id})
             .then(result => {
-                player.answeredQuestions = result
+                player.answeredQuestions = result.map(element => {
+                    return {
+                        ...element,
+                        isAnswerCorrect: element.correct
+                    }
+                })
             })
             .catch(error => console.log(error))
     }

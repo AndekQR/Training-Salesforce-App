@@ -5,15 +5,35 @@ import QUESTION_OBJECT from '@salesforce/schema/Question__c';
 import STAGE_FIELD from '@salesforce/schema/Question__c.Stage__c';
 import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 
+const GAME_TYPES = ['Time', 'Questions'];
+
 export default class Tr_QuestionConfigurator extends LightningElement {
     categories = [];
     stages = [];
     error = undefined;
     isQuestionAmountGame = true;
+    initialGameType = GAME_TYPES[1];
     @api isTimeGame = false;
     @api gameDuration = 0;
     @api selectedCategories = [];
     @api selectedStages = [];
+
+    get gameTypesOptions() {
+        return GAME_TYPES.map(element => {
+            return {
+                label: element,
+                value: element
+            }
+        });
+    }
+
+    get gameDurationInputLabel() {
+        if(this.isTimeGame) {
+            return 'Time (minutes)';
+        } else {
+            return 'Number Of Questions'
+        }
+    }
 
     @wire(getObjectInfo, { objectApiName: QUESTION_OBJECT })
     questionMetadata;
@@ -25,6 +45,7 @@ export default class Tr_QuestionConfigurator extends LightningElement {
             this.categories = data.values.map( category => ({label: category.label, value: category.value, checked: false}));
         } else if(error) {
             this.error = error;
+            this.categories = undefined;
         }
     }
 
@@ -35,6 +56,7 @@ export default class Tr_QuestionConfigurator extends LightningElement {
             this.stages = data.values.map( stage => ({label: stage.label, value: stage.value, checked: false}));
         } else if(error) {
             this.error = error;
+            this.stages = undefined;
         }
     }
 
@@ -59,15 +81,13 @@ export default class Tr_QuestionConfigurator extends LightningElement {
     }
 
     handleGameSettingsChange(event) {
-       let setting = event.currentTarget.dataset.id;
-       let value = event.target.checked;
-       if (setting === 'TimeGame') {
-           this.isTimeGame = value;
-           this.isQuestionAmountGame = !value;
-       } else {
-           this.isTimeGame = !value;
-           this.isQuestionAmountGame = value;
-       }
+        if(event.target.value === 'Time') {
+                this.isTimeGame = true;
+                this.isQuestionAmountGame = false;
+        } else {
+            this.isTimeGame = false;
+            this.isQuestionAmountGame = true;
+        }
     }
 
     handleValueChange(event) {

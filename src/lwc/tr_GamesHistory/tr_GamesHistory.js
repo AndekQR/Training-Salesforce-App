@@ -1,7 +1,7 @@
 import {LightningElement, track, wire} from 'lwc';
 import noHeaderAppPage from '@salesforce/resourceUrl/noHeaderAppPage'
 import {loadStyle} from 'lightning/platformResourceLoader';
-import  _getGamesHistory from '@salesforce/apex/TR_GameService.getArchivedGames';
+import _getGamesHistory from '@salesforce/apex/TR_GameService.getArchivedGames';
 
 import first from '@salesforce/label/c.first'
 import previous from '@salesforce/label/c.previous'
@@ -15,7 +15,6 @@ const PAGE_SIZES = [12, 24, 48, 96];
 
 export default class Tr_GamesHistory extends LightningElement {
 
-    wiredResponse;
     paginationResponse;
     error;
     @track
@@ -35,8 +34,8 @@ export default class Tr_GamesHistory extends LightningElement {
     selectedGameId = '';
 
     get selectedGame() {
-        if(this.paginationResponse){
-            if(this.selectedGameId){
+        if (this.paginationResponse) {
+            if (this.selectedGameId) {
                 return this.paginationResponse.data.find(element => element.id === this.selectedGameId);
             }
         }
@@ -48,19 +47,20 @@ export default class Tr_GamesHistory extends LightningElement {
 
     connectedCallback() {
         loadStyle(this, noHeaderAppPage);
+        this.refreshHistoryData();
     }
 
-    @wire(_getGamesHistory, {paginationRequest: '$paginationParams'})
-    wiredPaginationResponse(response) {
-        this.wiredResponse = response;
+    refreshHistoryData() {
         this.selectedGameId = '';
-        if(response.data) {
-            this.paginationResponse = response.data;
-            this.error = response.error;
-        } else if(response.error) {
-            this.error = response.error;
-            this.paginationResponse = undefined;
-        }
+        _getGamesHistory({paginationRequest: this.paginationParams})
+            .then(result => {
+                this.paginationResponse = result
+                this.error = undefined;
+            })
+            .catch(error => {
+                this.error = error;
+                this.paginationResponse = undefined;
+            })
     }
 
     get pageSizeOptions() {
@@ -99,6 +99,7 @@ export default class Tr_GamesHistory extends LightningElement {
             pageSize: Number(event.detail.value),
             pageNumber: FIRST_PAGE_NUMBER
         }
+        this.refreshHistoryData();
     }
 
     handleFirst() {
@@ -107,6 +108,7 @@ export default class Tr_GamesHistory extends LightningElement {
                 ...this.paginationParams,
                 pageNumber: FIRST_PAGE_NUMBER
             };
+            this.refreshHistoryData();
         }
     }
 
@@ -116,6 +118,7 @@ export default class Tr_GamesHistory extends LightningElement {
                 ...this.paginationParams,
                 pageNumber: (--this.paginationParams.pageNumber)
             };
+            this.refreshHistoryData();
         }
     }
 
@@ -125,6 +128,7 @@ export default class Tr_GamesHistory extends LightningElement {
                 ...this.paginationParams,
                 pageNumber: (++this.paginationParams.pageNumber)
             };
+            this.refreshHistoryData();
         }
     }
 
@@ -134,6 +138,7 @@ export default class Tr_GamesHistory extends LightningElement {
                 ...this.paginationParams,
                 pageNumber: this.lastPageNumber
             };
+            this.refreshHistoryData();
         }
     }
 
@@ -142,5 +147,6 @@ export default class Tr_GamesHistory extends LightningElement {
             ...this.paginationParams,
             searchQuery: event.target.value
         };
+        this.refreshHistoryData();
     }
 }
