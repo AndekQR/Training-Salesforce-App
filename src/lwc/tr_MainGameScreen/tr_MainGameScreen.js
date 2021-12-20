@@ -1,5 +1,5 @@
 import {api, LightningElement, track, wire} from 'lwc';
-import countGamesBetweenPlayers from '@salesforce/apex/TR_GameService.countGamesBetweenPlayers';
+import countGamesBetweenPlayers from '@salesforce/apex/TR_GameController.countGamesBetweenPlayers';
 import good_answers from '@salesforce/label/c.good_answers';
 import bad_answers from '@salesforce/label/c.bad_answers';
 import all_answers from '@salesforce/label/c.all_answers';

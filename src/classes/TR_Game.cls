@@ -15,37 +15,46 @@ public class TR_Game {
     public TR_Game() {
     }
 
-    public TR_Game(Game__c game) {
-        this.id = game.Id;
-        this.type = game.Type__c;
-        this.duration = game.Duration__c;
-    }
+    public class TR_GameBuilder {
 
-    public static TR_Game createFullObject(Game__c game) {
-        TR_Game trGame = new TR_Game();
-        trGame.id = game.Id;
-        trGame.type = game.Type__c;
-        trGame.duration = game.Duration__c;
-        trGame.createdTime = game.CreatedDate;
-        trGame.questions = TR_Question.mapToTrQuestions(game.AnsweredQuestions__r);
-        Set<Contact> contacts = getContactsWithoutDuplicates(game);
-        trGame.participants = TR_Participant.mapToParticipants(new List<Contact>(contacts));
-        return trGame;
-    }
+        private TR_Game game;
 
-    private static Set<Contact> getContactsWithoutDuplicates(Game__c game) {
-        Set<Contact> contacts = new Set<Contact>();
-        for (AnsweredQuestion__c answeredQuestion : game.AnsweredQuestions__r) {
-            contacts.add(answeredQuestion.Contact__r);
+        public TR_GameBuilder() {
+            this.game = new TR_Game();
         }
-        return contacts;
-    }
 
-    public static List<TR_Game> mapToTrGames(List<Game__c> games) {
-        List<TR_Game> trGames = new List<TR_Game>();
-        for (Game__c game : games) {
-            trGames.add(createFullObject(game));
+        public TR_GameBuilder setId(String id) {
+            this.game.id = id;
+            return this;
         }
-        return trGames;
+
+        public TR_GameBuilder setType(String type) {
+            this.game.type = type;
+            return this;
+        }
+
+        public TR_GameBuilder setDuration(Decimal duration) {
+            this.game.duration = duration;
+            return this;
+        }
+
+        public TR_GameBuilder setQuestions(List<TR_Question> questions) {
+            this.game.questions = questions;
+            return this;
+        }
+
+        public TR_GameBuilder setParticipants(List<TR_Participant> participants) {
+            this.game.participants = participants;
+            return this;
+        }
+
+        public TR_GameBuilder setCreatedTime(Datetime createdTime) {
+            this.game.createdTime = createdTime;
+            return this;
+        }
+
+        public TR_Game build() {
+            return this.game;
+        }
     }
 }

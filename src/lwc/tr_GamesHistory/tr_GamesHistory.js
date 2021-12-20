@@ -1,7 +1,7 @@
 import {LightningElement, track, wire} from 'lwc';
 import noHeaderAppPage from '@salesforce/resourceUrl/noHeaderAppPage'
 import {loadStyle} from 'lightning/platformResourceLoader';
-import _getGamesHistory from '@salesforce/apex/TR_GameService.getArchivedGames';
+import _getGamesHistory from '@salesforce/apex/TR_GameController.getArchivedGames';
 
 import first from '@salesforce/label/c.first'
 import previous from '@salesforce/label/c.previous'

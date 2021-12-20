@@ -1,6 +1,6 @@
-import createGame from "@salesforce/apex/TR_GameService.createGame";
-import saveAnsweredQuestion from "@salesforce/apex/TR_QuestionService.saveAnsweredQuestion";
-import finishGame from "@salesforce/apex/TR_GameService.finishGame";
+import createGame from "@salesforce/apex/TR_GameController.createGame";
+import saveAnsweredQuestion from "@salesforce/apex/TR_QuestionController.saveAnsweredQuestion";
+import finishGame from "@salesforce/apex/TR_GameController.finishGame";
 
 const callCreateGame = (gameType, gameDuration) => {
     return createGame({type: gameType, duration: gameDuration})

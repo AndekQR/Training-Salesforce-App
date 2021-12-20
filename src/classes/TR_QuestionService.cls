@@ -1,22 +1,31 @@
 public with sharing class TR_QuestionService {
-    @AuraEnabled
-    public static List<TR_Question> getQuestion(String[] categories, String[] stages) {
-        String query = 'SELECT Id, Question__c, Answer__c, Category__c, Stage__c FROM Question__c WHERE ' +
-                'Category__c IN :categories';
-        if (stages != null & !stages.isEmpty()) {
-            query = query + ' AND (Stage__c IN :stages OR Stage__c = NULL)';
+
+    private static TR_QuestionService instance;
+
+    public static TR_QuestionService getInstance() {
+        if (instance == null) {
+            instance = new TR_QuestionService();
         }
-        List<Question__c> questions = Database.query(query);
+        return instance;
+    }
+
+    public List<TR_Question> getQuestion(String[] categories, String[] stages) {
+        List<Question__c> questions = TR_QuestionsSelector.selectQuestionsByCategoryAndStage(categories, stages);
         List<TR_Question> questionsWrapper = new List<TR_Question>();
         for (Question__c question : questions) {
-            TR_Question wrapper = new TR_Question(question);
-            questionsWrapper.add(wrapper);
+            TR_Question trQuestion = new TR_Question.TR_QuestionBuilder()
+                    .setId(question.Id)
+                    .setQuestion(question.Question__c)
+                    .setAnswer(question.Answer__c)
+                    .setCategory(question.Category__c)
+                    .setStage(question.Stage__c)
+                    .build();
+            questionsWrapper.add(trQuestion);
         }
         return questionsWrapper;
     }
 
-    @AuraEnabled
-    public static void saveAnsweredQuestion(String questionId, String participantId, String gameId, Boolean isCorrect) {
+    public void saveAnsweredQuestion(String questionId, String participantId, String gameId, Boolean isCorrect) {
         AnsweredQuestion__c anQuestion = new AnsweredQuestion__c();
         anQuestion.Contact__c = participantId;
         anQuestion.Game__c = gameId;
@@ -25,23 +34,30 @@ public with sharing class TR_QuestionService {
         insert anQuestion;
     }
 
-    @AuraEnabled
-    public static List<TR_AnsweredQuestion> getAnsweredQuestions(String gameId, String participantId) {
-        List<AnsweredQuestion__c> questions = [
-                SELECT Id, Correct__c, Question__r.Question__c
-                FROM AnsweredQuestion__c
-                WHERE Game__c = :gameId AND Contact__c = :participantId
-        ];
+    public List<TR_Question> getAnsweredQuestions(String gameId, String participantId) {
+        List<AnsweredQuestion__c> questions = TR_AnsweredQuestionsSelector.selectAnsweredQuestionsByGameAndParticipant(gameId, participantId);
         sendSummaryEmail(participantId, questions);
-        return TR_AnsweredQuestion.mapToAnsweredQuestions(questions);
+        List<TR_Question> result = new List<TR_Question>();
+        for (AnsweredQuestion__c answeredQuestion : questions) {
+            TR_Question trQuestion = new TR_Question.TR_QuestionBuilder()
+                    .setId(answeredQuestion.Question__r.Id)
+                    .setQuestion(answeredQuestion.Question__r.Question__c)
+                    .setAnswer(answeredQuestion.Question__r.Answer__c)
+                    .setCategory(answeredQuestion.Question__r.Category__c)
+                    .setStage(answeredQuestion.Question__r.Stage__c)
+                    .setAnsweredBy(answeredQuestion.Contact__c)
+                    .setIsAnswerCorrect(answeredQuestion.Correct__c)
+                    .build();
+            result.add(trQuestion);
+        }
+        return result;
     }
 
-    @AuraEnabled
-    public static void sendSummaryEmail(String participantId, List<AnsweredQuestion__c> questions) {
-        Contact contact = [SELECT Email, Id FROM Contact WHERE Id = :participantId];
+    public void sendSummaryEmail(String participantId, List<AnsweredQuestion__c> questions) {
+        List<Contact> contacts = TR_ContactsSelector.selectContactById(participantId);
         try {
             Messaging.SingleEmailMessage message = new Messaging.SingleEmailMessage();
-            message.setTargetObjectId(contact.Id);
+            message.setTargetObjectId(contacts[0].Id);
             message.optOutPolicy = 'FILTER';
             message.subject = 'Game Summary';
             String body = '<html><body>' + parseQuestions(questions) + '</body></html>';
@@ -55,7 +71,7 @@ public with sharing class TR_QuestionService {
         }
     }
 
-    private static String parseQuestions(List<AnsweredQuestion__c> questions) {
+    private String parseQuestions(List<AnsweredQuestion__c> questions) {
         String result = '<ul>';
         for (AnsweredQuestion__c question : questions) {
             result += '<li style="font-size: 16px; color: #000000;">' + question.Question__r.Question__c + '&nbsp;';

@@ -286,6 +286,11 @@
         <columns>Stage__c</columns>
         <columns>CREATEDBY_USER</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>Category__c</field>
+            <operation>equals</operation>
+            <value>Interview</value>
+        </filters>
         <label>All</label>
     </listViews>
     <nameField>

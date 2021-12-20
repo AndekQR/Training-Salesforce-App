@@ -1,5 +1,5 @@
 import {LightningElement, api, track} from 'lwc';
-import getAnsweredQuestions from '@salesforce/apex/TR_QuestionService.getAnsweredQuestions';
+import getAnsweredQuestions from '@salesforce/apex/TR_QuestionController.getAnsweredQuestions';
 
 export default class Tr_EndGameResult extends LightningElement {
 
@@ -10,7 +10,6 @@ export default class Tr_EndGameResult extends LightningElement {
     @track
     playerTwo;
     gameId = ''
-    answeredQuestions = [];
 
     async connectedCallback() {
         let details = JSON.parse(JSON.stringify(this.details));
@@ -30,12 +29,7 @@ export default class Tr_EndGameResult extends LightningElement {
     getAnswered(player) {
         return getAnsweredQuestions({gameId: this.gameId, participantId: player.id})
             .then(result => {
-                player.answeredQuestions = result.map(element => {
-                    return {
-                        ...element,
-                        isAnswerCorrect: element.correct
-                    }
-                })
+                player.answeredQuestions = result;
             })
             .catch(error => console.log(error))
     }

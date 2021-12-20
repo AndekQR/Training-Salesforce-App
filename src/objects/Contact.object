@@ -548,4 +548,10 @@
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Email_Required</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISBLANK(Email)</errorConditionFormula>
+        <errorMessage>Provide An Email Address</errorMessage>
+    </validationRules>
 </CustomObject>

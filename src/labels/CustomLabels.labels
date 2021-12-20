@@ -36,6 +36,13 @@
         <value>Close</value>
     </labels>
     <labels>
+        <fullName>first</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>first</shortDescription>
+        <value>First</value>
+    </labels>
+    <labels>
         <fullName>game_duration_greater_than</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -50,11 +57,25 @@
         <value>Good Answers</value>
     </labels>
     <labels>
+        <fullName>last</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>last</shortDescription>
+        <value>Last</value>
+    </labels>
+    <labels>
         <fullName>new_participant</fullName>
         <language>en_US</language>
         <protected>true</protected>
         <shortDescription>new participant</shortDescription>
         <value>New Participant</value>
+    </labels>
+    <labels>
+        <fullName>next</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>next</shortDescription>
+        <value>Next</value>
     </labels>
     <labels>
         <fullName>number_of_participants_must_equals</fullName>
@@ -85,6 +106,20 @@
         <value>pkt.</value>
     </labels>
     <labels>
+        <fullName>previous</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>previous</shortDescription>
+        <value>Previous</value>
+    </labels>
+    <labels>
+        <fullName>search</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>search</shortDescription>
+        <value>Search</value>
+    </labels>
+    <labels>
         <fullName>select_one_category</fullName>
         <language>en_US</language>
         <protected>true</protected>
@@ -97,6 +132,13 @@
         <protected>true</protected>
         <shortDescription>select one training stage</shortDescription>
         <value>Select at least one training stage</value>
+    </labels>
+    <labels>
+        <fullName>select_page_size</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>select page size</shortDescription>
+        <value>Select Page Size</value>
     </labels>
     <labels>
         <fullName>submit</fullName>

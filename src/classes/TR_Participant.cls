@@ -13,6 +13,28 @@ public class TR_Participant {
         this.email = contact.Email;
     }
 
+    public Boolean equals(Object obj) {
+        if (obj instanceof TR_Participant) {
+            TR_Participant trParticipant = (TR_Participant) obj;
+            return (this.id == trParticipant.id &&
+                    this.name == trParticipant.name &&
+                    this.email == trParticipant.email);
+        }
+        return false;
+    }
+
+    public override Integer hashCode() {
+        Integer tmp = 7;
+        tmp = tmp & this.id.hashCode();
+        if(this.name != null) {
+            tmp = tmp & this.name.hashCode();
+        }
+        if(this.email != null) {
+            tmp = tmp & this.email.hashCode();
+        }
+        return tmp;
+    }
+
     public TR_Participant() {
     }
 
@@ -23,5 +45,34 @@ public class TR_Participant {
             result.add(tmp);
         }
         return result;
+    }
+
+
+    public class TR_ParticipantBuilder {
+
+        private TR_Participant participant;
+
+        public TR_ParticipantBuilder() {
+            this.participant = new TR_Participant();
+        }
+
+        public TR_ParticipantBuilder setId(String id) {
+            this.participant.id = id;
+            return this;
+        }
+
+        public TR_ParticipantBuilder setName(String name) {
+            this.participant.name = name;
+            return this;
+        }
+
+        public TR_ParticipantBuilder setEmail(String email) {
+            this.participant.email = email;
+            return this;
+        }
+
+        public TR_Participant build() {
+            return this.participant;
+        }
     }
 }

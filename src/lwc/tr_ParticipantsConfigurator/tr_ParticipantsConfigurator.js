@@ -1,5 +1,5 @@
 import {api, LightningElement, wire} from 'lwc';
-import getAllParticipants from '@salesforce/apex/TR_ParticipantService.getAllParticipants';
+import getAllParticipants from '@salesforce/apex/TR_GameController.getAllParticipants';
 import {refreshApex} from '@salesforce/apex';
 import participants from '@salesforce/label/c.participants'
 

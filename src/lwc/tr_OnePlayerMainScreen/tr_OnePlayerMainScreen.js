@@ -3,7 +3,13 @@ import good_answers from '@salesforce/label/c.good_answers';
 import bad_answers from '@salesforce/label/c.bad_answers';
 import all_answers from '@salesforce/label/c.all_answers';
 import pkt from '@salesforce/label/c.pkt';
-import {callCreateGame, callFinishGame, callSaveAnsweredQuestion, isShowingTime, getParticipantDefinition} from "c/tr_GameService";
+import {
+    callCreateGame,
+    callFinishGame,
+    callSaveAnsweredQuestion,
+    isShowingTime,
+    getParticipantDefinition
+} from "c/tr_GameService";
 
 export default class Tr_OnePlayerMainScreen extends LightningElement {
 
@@ -37,7 +43,7 @@ export default class Tr_OnePlayerMainScreen extends LightningElement {
 
     terminateStopWatch() {
         const stopWatchComponent = this.template.querySelector('c-tr-_-stop-watch');
-        if(stopWatchComponent != null) {
+        if (stopWatchComponent != null) {
             stopWatchComponent.forceStop();
         }
     }
@@ -61,19 +67,21 @@ export default class Tr_OnePlayerMainScreen extends LightningElement {
     }
 
     handleGoodAnswer(event) {
-        this.turnOnLoading();
-        this.participant.goodAnswers++;
-        callSaveAnsweredQuestion(event.detail, true, this.participant.id, this.game.id)
-            .then(() => {
-                this.tryReduceRemainingQuestions();
-                this.turnOffLoading()
-            })
+        this.handleAnswer(event.detail, true);
     }
 
     handleBadAnswer(event) {
+        this.handleAnswer(event.detail, false);
+    }
+
+    handleAnswer(questionId, isCorrect) {
         this.turnOnLoading();
-        this.participant.badAnswers++;
-        callSaveAnsweredQuestion(event.detail, false, this.participant.id, this.game.id)
+        if (isCorrect) {
+            this.participant.goodAnswers++;
+        } else {
+            this.participant.badAnswers++;
+        }
+        callSaveAnsweredQuestion(questionId, isCorrect, this.participant.id, this.game.id)
             .then(() => {
                 this.tryReduceRemainingQuestions();
                 this.turnOffLoading()

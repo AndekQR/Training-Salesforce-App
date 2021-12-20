@@ -41,6 +41,9 @@
                       <option name="wildcard" value="false" />
                     </MetadataType>
                     <MetadataType>
+                      <option name="name" value="CustomField" />
+                    </MetadataType>
+                    <MetadataType>
                       <option name="name" value="CustomLabel" />
                     </MetadataType>
                     <MetadataType>

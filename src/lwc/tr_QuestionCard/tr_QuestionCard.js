@@ -1,6 +1,6 @@
 import {LightningElement, api} from 'lwc';
 import {ShowToastEvent} from 'lightning/platformShowToastEvent';
-import getQuestion from '@salesforce/apex/TR_QuestionService.getQuestion'
+import getQuestion from '@salesforce/apex/TR_QuestionController.getQuestion'
 
 const questionDegrees = 360;
 const answerDegrees = 180;
